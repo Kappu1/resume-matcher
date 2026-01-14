@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher AI - AI-Powered Resume Matching System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="ai-badge">
+                <i class="fas fa-robot"></i> AI POWERED
+            </div>
+            <h1><i class="fas fa-brain"></i> Resume Matcher <span class="ai-text">AI</span></h1>
+            <p class="subtitle">Advanced AI-Driven Resume Analysis & Job Matching System</p>
+            <div class="ai-features">
+                <span class="feature-badge"><i class="fas fa-magic"></i> Smart Matching</span>
+                <span class="feature-badge"><i class="fas fa-search"></i> Semantic Analysis</span>
+                <span class="feature-badge"><i class="fas fa-lightbulb"></i> AI Recommendations</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="card">
+                    <h2><i class="fas fa-upload"></i> Upload Resume</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag and drop your resume here or click to browse</p>
+                        <p class="file-types">Supported formats: PDF, DOCX</p>
+                        <input type="file" id="resumeFile" accept=".pdf,.docx,.doc" hidden>
+                    </div>
+                    <div id="fileInfo" class="file-info hidden"></div>
+                    <button class="btn btn-primary" id="uploadBtn" disabled>
+                        <i class="fas fa-upload"></i> Upload Resume
+                    </button>
+                </div>
+            </section>
+
+            <!-- Job Description Section -->
+            <section class="job-section">
+                <div class="card">
+                    <h2><i class="fas fa-briefcase"></i> Job Description</h2>
+                    <div class="job-input-group">
+                        <label for="jobTitle">Job Title (Optional)</label>
+                        <input type="text" id="jobTitle" placeholder="e.g., Software Engineer">
+                    </div>
+                    <div class="job-input-group">
+                        <label for="jobDescription">Job Description</label>
+                        <textarea id="jobDescription" rows="8" placeholder="Paste or type the job description here..."></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-primary" id="matchBtn" disabled>
+                            <i class="fas fa-search"></i> Match Resume
+                        </button>
+                        <button class="btn btn-secondary" id="saveJobBtn">
+                            <i class="fas fa-save"></i> Save Job
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Saved Jobs Section -->
+            <section class="jobs-section">
+                <div class="card">
+                    <h2><i class="fas fa-list"></i> Saved Jobs</h2>
+                    <div id="jobsList" class="jobs-list"></div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <div class="card ai-results-card">
+                    <div class="ai-processing-header">
+                        <h2><i class="fas fa-brain"></i> AI Analysis Results</h2>
+                        <span class="ai-tag"><i class="fas fa-robot"></i> Powered by AI</span>
+                    </div>
+                    
+                    <!-- Match Score -->
+                    <div class="match-score-container">
+                        <div class="score-circle">
+                            <svg class="score-ring" viewBox="0 0 120 120">
+                                <circle class="ring-background" cx="60" cy="60" r="54"></circle>
+                                <circle class="ring-progress" cx="60" cy="60" r="54" id="scoreRing"></circle>
+                            </svg>
+                            <div class="score-text">
+                                <span id="matchScore">0</span>
+                                <span class="percent">%</span>
+                            </div>
+                        </div>
+                        <div class="score-label">Match Score</div>
+                    </div>
+
+                    <!-- Matching Skills -->
+                    <div class="skills-section">
+                        <div class="skills-box matching-skills">
+                            <h3><i class="fas fa-check-circle"></i> Matching Skills</h3>
+                            <div id="matchingSkills" class="skills-list"></div>
+                        </div>
+                        <div class="skills-box missing-skills">
+                            <h3><i class="fas fa-exclamation-circle"></i> Missing Skills</h3>
+                            <div id="missingSkills" class="skills-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="recommendations">
+                        <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                        <div id="recommendationsList" class="recommendations-list"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="ai-loader">
+            <div class="spinner"></div>
+            <i class="fas fa-brain ai-brain-icon"></i>
+        </div>
+        <p>🤖 AI is analyzing...</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
