@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, jsonify, session
 from flask_cors import CORS
 import os
+import nltk
+
+nltk.data.path.append(os.path.join(os.getcwd(), "nltk_data"))
+nltk.download("punkt")
+nltk.download("punkt_tab")
 from werkzeug.utils import secure_filename
 from resume_matcher import ResumeMatcher
 from database import init_db, add_resume, add_job, get_all_jobs, get_resume_by_id
