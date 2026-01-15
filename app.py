@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, session
+from flask_cors import CORS
 import os
 from werkzeug.utils import secure_filename
 from resume_matcher import ResumeMatcher
@@ -6,6 +7,7 @@ from database import init_db, add_resume, add_job, get_all_jobs, get_resume_by_i
 import uuid
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['SECRET_KEY'] = 'your-secret-key-here-change-in-production'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
